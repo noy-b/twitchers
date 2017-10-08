@@ -64,12 +64,8 @@
 @media screen and (max-width: 992px) {
     :host {
         margin-left: 0;
-        margin-bottom: 59px;
+        height: calc(100vh - 59px);
     }
-    .streamer-details {
-        min-height: calc(100vh + 191px);
-        margin-bottom:59px;
-    }    
 }
 @media screen and (max-width:768px) {
 
