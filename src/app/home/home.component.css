@@ -1,0 +1,15 @@
+:host {
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background-color: #4b367c;
+    min-height:100vh;
+}
+.heading {
+    padding: 30px;
+    border: 1px solid;
+}
+.heading > h1 {
+    font-size:6rem;
+}

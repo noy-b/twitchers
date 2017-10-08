@@ -1,0 +1,55 @@
+// Main streamer class
+export class Streamer {
+    id: Number;
+    name: String;
+    username: String;
+    bio: String;
+    logo: String;
+    status: Status;
+    game: Game;
+    url: String;
+    viewers: String;
+    uptime: String;
+
+    constructor(obj) {
+        this.id = obj._id;
+        this.name = obj.name;
+        this.username = obj.display_name;
+        this.bio = obj.bio || 'No biography found for this user. :(';
+        this.logo = obj.logo || 'https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png';
+        this.status = new Status(obj.online);
+        this.game = new Game(obj.gamename, obj.cover);
+        this.url = `https://twitch.tv/${obj.name}`;
+        this.viewers = Number(obj.viewers).toLocaleString('en');
+        this.uptime = this.getUptime(new Date(), new Date(obj.uptime));
+    }
+
+    getUptime(now, then): String {
+        const uptimeMs      = now - then;
+        const uptimeSeconds = Math.floor(uptimeMs / 1000);
+        const uptimeMinutes = Math.floor(uptimeSeconds / 60);
+        const uptimeHours   = Math.floor(uptimeMinutes / 60);
+
+        return `${uptimeHours % 24}:${uptimeMinutes % 60 < 10 ? '0' : ''}${uptimeMinutes % 60}`;
+    }
+}
+// Status class (online\offline)
+export class Status {
+    value: Number;
+    text: String;
+
+    constructor(online) {
+        this.value = online ? 1 : 0;
+        this.text  = online ? 'online' : 'offline';
+    }
+}
+// Game class (name\cover)
+export class Game {
+    name: String;
+    cover: String;
+
+    constructor(game, cover) {
+        this.name = game;
+        this.cover  = cover || 'https://static-cdn.jtvnw.net/ttv-static/404_boxart.jpg';
+    }
+}

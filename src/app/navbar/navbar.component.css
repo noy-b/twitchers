@@ -1,0 +1,120 @@
+nav {
+    position: fixed;
+    display: flex;
+    min-width:300px;
+    flex-flow: column wrap;
+    background-color:rgb(21, 21, 21);
+    color:#fff;
+    top:0;
+    left:0;    
+    z-index:1000;
+    backface-visibility: hidden;
+    min-height:100vh;
+}
+/* Nav brand image */
+nav .brand-container {
+    display: flex;
+    padding: 5em 3em;
+    text-align: center;
+    background-color: #222;
+}
+nav .brand {
+    color: grey;
+    width: 100%;
+    border: 1px solid grey;
+    padding:.8em;
+}
+/* Nav buttons */
+nav a:not(.brand) {
+    display:flex;
+    padding: 1.5em 0;
+    width:100%;
+    color: #595959;
+    align-items: center;
+    transition: all .15s linear;
+} nav a:not(.brand):not(:nth-child(4)) {
+    border-bottom: 1px solid rgb(29, 29, 29);
+} nav a .nav-icon {
+    padding:0 2em 0 .8em;
+} nav a .nav-icon:before {
+    font-family: "Material Design Icons";
+    font-size: 1.3rem;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+} nav a.all .nav-icon:before {
+    content: "\F63B";
+} nav a.online .nav-icon:before {
+    content: "\F0FC";
+} nav a.offline .nav-icon:before {
+    content: "\F0FF";  
+} nav a:hover, nav a:focus {
+    background-color:rgba(0,0,0,.2);
+    cursor:pointer;
+} nav a.active {
+    color:#fff;
+}
+/* Refresh button */
+button.refresh {
+    font-family: 'Roboto', sans-serif;
+    display:flex;
+    padding: 1em;
+    margin-top:auto;
+    color: #595959;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    bottom:0;
+    right:0;
+    transition: all .15s ease-in;
+} button.refresh:after {
+    content: "\F450";  
+    font-family: "Material Design Icons";
+    font-size: 2rem;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+} button.refresh:hover, button.refresh:focus {
+    color:#fff;
+    cursor:pointer;
+    background-color:rgba(0,0,0,.2);
+}
+
+@media screen and (max-width:992px) {
+    nav {
+        flex-flow: row nowrap;
+        justify-content:flex-start;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        min-width: auto;
+        min-height: auto;
+    }
+    /* Nav brand image */
+    nav .brand-container {
+        display: none;
+    }
+    /* Nav buttons */
+    nav a:not(.brand) {
+        width:auto;
+        padding: 1em;
+    } nav a .nav-icon {
+        padding:0 1em 0 0;
+    } nav a:not(.brand):not(:nth-child(4)) {
+        border-bottom: none;
+    } 
+    /* Refresh button */
+    button.refresh {
+        margin-top:0;
+        margin-left:auto;
+    }       
+}
+@media screen and (max-width:400px) {
+    nav a .nav-text {
+        display:none;
+    } nav a .nav-icon {
+        padding:0;
+    }
+}

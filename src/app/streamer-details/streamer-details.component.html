@@ -1,0 +1,16 @@
+<div *ngIf="streamerInfos | async as streamer" [class.sticky]="isSticky" class="streamer-details">
+    <div class="streamer-header" [style.background-image]="'url(' + streamer.profile_banner + ')'" 
+    [ngStyle]="streamer.has_banner ? '' : {'background-repeat': 'repeat-x', 'background-size': 'auto', 'background-position': 'top' }">
+        <div class="streamer-logo" [style.background-image]="'url(' + streamer.logo + ')'"></div>
+        <div class="streamer-infos">
+            <h1 class="streamer-title">{{ streamer.username }}</h1>
+            <p class="streamer-bio">{{ streamer.bio }}</p>
+        </div>
+    </div>
+    <div class="streamer-body">
+        <iframe *ngIf="streamer.online.player_url" class="streamer-player" [src]="streamer.online.player_url | safe" allowfullscreen="true"></iframe>
+    </div>
+    <div class="streamer-footer">
+
+    </div>
+</div>

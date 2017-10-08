@@ -1,1 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+    height:100vh;
+    background-color: #4b367c;
+    color:#222;
+    font-family: 'Roboto', sans-serif;
+    margin:0;
+}
+*:focus {
+    outline:none;
+}
+a {
+    text-decoration:none;
+}
+h1 {
+    font-weight:100;
+    margin:0;
+}
+.mvh-100 {
+    min-height: 100vh;
+}
+
+/* Flex Tooltips with image */
+/*
+.tooltip {
+    position: absolute;
+    content: attr(data-tooltip);
+    width: 100px;
+    line-height: 1.5;
+    opacity: 0;
+    background: #222;
+    color: #fff;
+    box-shadow: 0 0 10px -3px black;
+    border-radius: 2px;
+    backface-visibility: hidden;
+    transform: translateY(10px);
+    z-index:-1;
+    transition: opacity .3s ease-out, transform .3s ease-in; 
+} .tooltip > .tooltip-text {
+    padding: 5px;
+} .tooltip > .tooltip-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    min-height: 85px;
+}
+.with-tooltip:hover .tooltip {
+    transform: translateY(0);
+    opacity:1;
+    z-index:1;
+}
+*/
+
+/* Basic tooltip with data-attributes */
+
+[data-tooltip] {
+    justify-content: center;
+} [data-tooltip]:after {
+    position: absolute;
+    content: attr(data-tooltip);
+    max-width: 100px;
+    padding: .7em;
+    margin-top: 35px;
+    line-height: 1.5;
+    opacity: 0;
+    background: rgba(34, 34, 34, 0.9);
+    color: #fff;
+    border-radius: 2px;
+    backface-visibility:hidden;
+    z-index:-1;
+    transition: opacity .2s ease-out;
+} [data-tooltip]:hover:after {
+    opacity: 1;
+    z-index: 2;
+}

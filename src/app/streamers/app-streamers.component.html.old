@@ -1,0 +1,24 @@
+<div class="streams">
+    <ng-container *ngFor="let streamer of streamers">
+        <div *ngIf="param === 'all' || param === streamer.status.text" [attr.data-id]="streamer.id" class="stream {{streamer.name}} {{streamer.status.text}}">
+            <div class="stream-body" [style.background-image]="'url(' + streamer.logo + ')'">
+               <div class="stream-current" [ngClass]="streamer.status.value ? 'with-tooltip' : ''">
+                 <div *ngIf="streamer.status.value" class="tooltip">
+                     <div class="tooltip-image" [style.background-image]="'url(' + streamer.game.cover + ')'"></div>
+                     <div class="tooltip-text">{{streamer.game.name}}</div>
+                 </div>
+                 <span class="stream-game">{{streamer.game.name || ''}}</span>
+               </div>
+               <div class="stream-infos" *ngIf="streamer.status.value">
+                    <span class="stream-viewers">{{streamer.viewers}}</span>
+                    <span class="stream-uptime">{{streamer.uptime}}</span>
+               </div>
+            </div>
+            <div class="stream-footer">
+                <div class="stream-name">
+                  <h1><a target="_blank" [attr.href]="streamer.url">{{streamer.username}}</a></h1>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

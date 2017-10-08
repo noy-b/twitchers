@@ -1,0 +1,10 @@
+<nav class="nav">
+    <div class="brand-container">
+        <a class="brand" title="Home" routerLink="home">{{navBrand}}</a>
+    </div>
+    <a *ngFor="let nav of navItems" title="{{nav.text}}" ngClass="{{nav.anchor | lowercase}}" routerLink="/streamers/{{nav.anchor | lowercase}}" [replaceUrl]="true" routerLinkActive="active">
+        <span class="nav-icon"></span>
+        <span class="nav-text">{{nav.anchor}}</span>
+    </a>
+    <button title="Refresh Streamers List" class="refresh" (click)="refreshStreamers()"></button>
+</nav>
