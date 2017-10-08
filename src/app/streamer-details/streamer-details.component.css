@@ -24,6 +24,7 @@
     justify-content:start;
 } .streamer-details > .streamer-header:before {
     position:absolute;
+    top: 0; /*  Otherwise IE is unhappy */
     content: " ";
     width:100%;
     height:100%;
@@ -59,6 +60,7 @@
 } .streamer-details > .streamer-body > .streamer-player {
     border:0;
     width:100%;
+    height:100vh; /*  Otherwise IE is unhappy */
 }
 
 @media screen and (max-width: 992px) {
