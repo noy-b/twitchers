@@ -6,7 +6,8 @@
     margin-left:300px;
     background-color:rgba(0, 0, 0, 0.4);
     height: 100vh;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x:hidden;
     z-index:1001;
 }
 .streamer-details {
@@ -68,6 +69,12 @@
         margin-left: 0;
         height: calc(100vh - 59px);
     }
+    .streamer-details {
+        min-height: calc(100vh + 250px - 59px);
+    }
+    .streamer-details > .streamer-body > .streamer-player {
+        height:calc(100vh - 59px); /*  Otherwise IE is unhappy */
+    }    
 }
 @media screen and (max-width:768px) {
 
