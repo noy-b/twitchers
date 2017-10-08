@@ -71,8 +71,7 @@
     }
     .streamer-details {
         min-height: calc(100vh + 250px - 59px);
-    }
-    .streamer-details > .streamer-body > .streamer-player {
+    } .streamer-details > .streamer-body > .streamer-player {
         height:calc(100vh - 59px); /*  Otherwise IE is unhappy */
     }    
 }
