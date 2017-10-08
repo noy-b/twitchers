@@ -1,6 +1,8 @@
 # Twitch/ers
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.6.
+A simple page\app to browse Twitch's streamers, featuring a long polling system to keep the streamers' status updated.
+
+Generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.6.
 
 ## Development server
 
