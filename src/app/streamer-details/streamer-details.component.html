@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="streamer-body">
-        <iframe *ngIf="streamer.online.player_url" class="streamer-player" [src]="streamer.online.player_url | safe" allowfullscreen="true"></iframe>
+        <iframe *ngIf="streamer.player_url" class="streamer-player" [src]="streamer.player_url | safe" allowfullscreen="true"></iframe>
     </div>
     <div class="streamer-footer">
 

@@ -8,7 +8,7 @@ export class StreamerDetails {
     logo: String;
     profile_banner: String;
     has_banner: Boolean;
-    video_banner: String;
+    player_url: String;
     url: String;
     online: Online|Boolean;
 
@@ -21,7 +21,7 @@ export class StreamerDetails {
         this.logo = channel.logo || 'https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png';
         this.profile_banner = channel.profile_banner || 'https://web-cdn.ttvnw.net/images/xarth/bg_glitch_pattern.png';
         this.has_banner = channel.profile_banner || false;
-        this.video_banner = channel.video_banner || false;
+        this.player_url = `http://player.twitch.tv/?channel=${this.name}`;
         this.url = `https://go.twitch.tv/${this.name}`;
         this.online = live.stream ? new Online(live.stream) : false;
     }
@@ -29,13 +29,11 @@ export class StreamerDetails {
 // Online class
 export class Online {
     game: Game;
-    player_url: String;
     viewers: Number;
     uptime: String;
 
     constructor(live) {
         this.game = new Game(live.game, live.game_box);
-        this.player_url = `http://player.twitch.tv/?channel=${live.channel.name}&muted=true`;
         this.viewers = live.viewers;
         this.uptime = this.getUptime(new Date(), new Date(live.created_at));
     }
