@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
@@ -13,18 +13,6 @@ import { } from '../animations';
 })
 export class StreamerDetailsComponent implements OnInit, OnDestroy {
     private streamerInfos;
-    private isSticky: Boolean;
-
-    @HostListener('scroll', ['$event'])
-    onScroll(e): void {
-        const st = e.srcElement.scrollTop;
-        console.log(st);
-        if (st >= 150) {
-            this.isSticky = true;
-        } else {
-            this.isSticky = false;
-        }
-    }
 
     constructor(
         private activeRoute: ActivatedRoute,

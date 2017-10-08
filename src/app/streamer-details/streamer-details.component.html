@@ -1,4 +1,4 @@
-<div *ngIf="streamerInfos | async as streamer" [class.sticky]="isSticky" class="streamer-details">
+<div *ngIf="streamerInfos | async as streamer" class="streamer-details">
     <div class="streamer-header" [style.background-image]="'url(' + streamer.profile_banner + ')'" 
     [ngStyle]="streamer.has_banner ? '' : {'background-repeat': 'repeat-x', 'background-size': 'auto', 'background-position': 'top' }">
         <div class="streamer-logo" [style.background-image]="'url(' + streamer.logo + ')'"></div>
