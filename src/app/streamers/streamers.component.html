@@ -1,25 +1,25 @@
 <div class="streams">
     <ng-container *ngFor="let streamer of streamers | async">
         <div #streamParent [class.focus]="streamParent.focus === true" *ngIf="(filter | async) === 'all' || (filter | async) === 'all' || (filter | async) === streamer.status.text" 
-        [attr.data-id]="streamer.id" class="stream {{streamer.name}} {{streamer.status.text}}">
+        [attr.data-id]="streamer.id" class="stream {{ streamer.name }} {{ streamer.status.text }}">
             <div #stream [class.focus]="stream.focus === true" class="stream-body" [style.background-image]="'url(' + streamer.logo + ')'">
                <div class="stream-current" [attr.data-tooltip]="streamer.game || null">
-                 <span class="stream-game">{{streamer.game || ''}}</span>
+                 <span class="stream-game">{{ streamer.game || '' }}</span>
                </div>
                <div class="stream-infos" *ngIf="streamer.status.value">
                     <span class="stream-viewers">{{ streamer.viewers.toLocaleString('en') }}</span>
-                    <span class="stream-uptime">{{streamer.uptime}}</span>
+                    <span class="stream-uptime">{{ streamer.uptime }}</span>
                </div>
                <div class="stream-overlay">
-                    <a title="More about {{streamer.username}}" [routerLink]="[ { outlets: { details: [ streamer.name ] } } ]" class="stream-more" (focus)="stream.focus = true; streamParent.focus = true" (blur)="stream.focus = false; streamParent.focus = false"></a>
+                    <a title="More about {{ streamer.username }}" [routerLink]="[ { outlets: { details: [ streamer.name ] } } ]" class="stream-more" (focus)="stream.focus = true; streamParent.focus = true" (blur)="stream.focus = false; streamParent.focus = false"></a>
                </div>
             </div>
             <div class="stream-footer">
                 <div class="stream-name">
-                  <h1><a title="Go to {{streamer.username}} channel" target="_blank" [attr.href]="streamer.url" (focus)="stream.focus = false; streamParent.focus = true" (blur)="streamParent.focus = false">{{streamer.username}}</a></h1>
+                  <h1><a title="Go to {{ streamer.username }} channel" target="_blank" [attr.href]="streamer.url" (focus)="stream.focus = false; streamParent.focus = true" (blur)="streamParent.focus = false">{{streamer.username}}</a></h1>
                 </div>
             </div>
         </div>
     </ng-container>
 </div>
-<router-outlet name="details"></router-outlet>
+    <router-outlet name="details"></router-outlet>
