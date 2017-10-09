@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
+import { Title } from '@angular/platform-browser';
 import { StreamerDetailsService } from './services/streamer-details.service';
 
 import { } from '../animations';
@@ -12,16 +13,23 @@ import { } from '../animations';
     styleUrls: ['./streamer-details.component.css']
 })
 export class StreamerDetailsComponent implements OnInit, OnDestroy {
+    private streamerDetailsSub: Subscription;
     private streamerInfos;
     private streamerName = this.activeRoute.snapshot.params['streamersName'];
 
     constructor(
         private activeRoute: ActivatedRoute,
-        private streamerDetails: StreamerDetailsService
+        private streamerDetails: StreamerDetailsService,
+        private titleService: Title
     ) { }
 
+    // Get streamers details and set page title
     getDetails(): void {
-       this.streamerInfos = this.streamerDetails.getStreamerDetails(this.streamerName);
+        this.streamerDetailsSub =
+        this.streamerDetails.getStreamerDetails(this.streamerName).subscribe((streamer) => {
+           this.streamerInfos = streamer;
+           this.titleService.setTitle(`Twitch/ers - ${ this.streamerInfos.username }`);
+          });
     }
 
     ngOnInit(): void {
@@ -29,6 +37,6 @@ export class StreamerDetailsComponent implements OnInit, OnDestroy {
         document.getElementsByTagName('body')[0].style['overflow'] = 'hidden';
     }
     ngOnDestroy(): void {
-
+        this.streamerDetailsSub.unsubscribe();
     }
 }
