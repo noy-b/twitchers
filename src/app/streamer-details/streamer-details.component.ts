@@ -13,6 +13,7 @@ import { } from '../animations';
 })
 export class StreamerDetailsComponent implements OnInit, OnDestroy {
     private streamerInfos;
+    private streamerName = this.activeRoute.snapshot.params['streamersName'];
 
     constructor(
         private activeRoute: ActivatedRoute,
@@ -20,10 +21,7 @@ export class StreamerDetailsComponent implements OnInit, OnDestroy {
     ) { }
 
     getDetails(): void {
-        this.activeRoute.paramMap
-            .map(params => params.get('streamersName')).subscribe(streamer => {
-                this.streamerInfos = this.streamerDetails.getStreamerDetails(streamer);
-            });
+       this.streamerInfos = this.streamerDetails.getStreamerDetails(this.streamerName);
     }
 
     ngOnInit(): void {
