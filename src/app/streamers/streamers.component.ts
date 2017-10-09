@@ -7,14 +7,14 @@ import { Subscription } from 'rxjs/Rx';
 import { Streamer } from './models/streamers';
 import { StreamersService } from './services/streamers.service';
 
-import { staggerFade, slideIn } from '../animations';
+import { staggerFade } from '../animations';
 
 
 @Component({
   selector: 'tvrs-streamers',
   templateUrl: './streamers.component.html',
   styleUrls: ['./streamers.component.css'],
-  animations: [ staggerFade, slideIn ],
+  animations: [ staggerFade ],
 })
 export class StreamersComponent implements OnInit, OnDestroy {
   @HostBinding('@staggerFade')
