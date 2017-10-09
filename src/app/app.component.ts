@@ -16,10 +16,10 @@ import { routeAnim, slideUpDown } from './animations';
 export class AppComponent implements OnInit, OnDestroy {
 
   private isHome = true;
-  private routerEvents: any;
-
   private showSpinner: Boolean;
+
   private spinnerSub: Subscription;
+  private routerSub: Subscription;
 
   constructor(
     private router: Router,
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ) { }
   ngOnInit() {
     // Listen to route changes (filtered to NavigationEnd) and set isHome accordingly
-    this.routerEvents =
+    this.routerSub =
       this.router.events
         .filter(e => e instanceof NavigationEnd)
         .subscribe((e) => {
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy() {
-    this.routerEvents.unsubscribe();
+    this.routerSub.unsubscribe();
     this.spinnerSub.unsubscribe();
   }
 }
