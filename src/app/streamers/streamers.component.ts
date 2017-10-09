@@ -1,5 +1,6 @@
 import { Component, HostBinding, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs/Rx';
 
@@ -7,6 +8,7 @@ import { Streamer } from './models/streamers';
 import { StreamersService } from './services/streamers.service';
 
 import { staggerFade, slideIn } from '../animations';
+
 
 @Component({
   selector: 'tvrs-streamers',
@@ -25,7 +27,8 @@ export class StreamersComponent implements OnInit, OnDestroy {
 
   constructor(
     private activeRoute: ActivatedRoute,
-    private streamersService: StreamersService
+    private streamersService: StreamersService,
+    private titleService: Title
   ) {
     this.streamers = this.streamersService.streamersList;
   }
@@ -40,6 +43,7 @@ export class StreamersComponent implements OnInit, OnDestroy {
   }
   // Hooks Life Cycle
   ngOnInit(): void {
+    this.titleService.setTitle(`Twitch/ers - Hub`);
     this.pollStreamers();
     this.filterStreamers();
   }

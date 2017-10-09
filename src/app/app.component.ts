@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/filter';
 
@@ -11,7 +11,7 @@ import { routeAnim, slideUpDown } from './animations';
 @Component({
   selector: 'tvrs-root',
   templateUrl: './app.component.html',
-  animations: [ routeAnim, slideUpDown ]
+  animations: [routeAnim, slideUpDown]
 })
 export class AppComponent implements OnInit, OnDestroy {
 
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private spinnerService: SpinnerService
   ) { }
   ngOnInit() {
-    // Listen to route changes (filtered to NavigationEnd) and set the property accordingly
+    // Listen to route changes (filtered to NavigationEnd) and set isHome accordingly
     this.routerEvents =
       this.router.events
         .filter(e => e instanceof NavigationEnd)
