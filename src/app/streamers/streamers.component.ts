@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/Rx';
 import { Streamer } from './models/streamers';
 import { StreamersService } from './services/streamers.service';
 
-import { staggerFade } from '../animations';
+import { staggerFade } from '../_animations';
 
 
 @Component({

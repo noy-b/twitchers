@@ -6,7 +6,7 @@ import 'rxjs/add/operator/filter';
 
 import { SpinnerService } from './spinner/services/spinner.service';
 
-import { routeAnim, slideUpDown } from './animations';
+import { routeAnim, slideUpDown } from './_animations';
 
 @Component({
   selector: 'tvrs-root',

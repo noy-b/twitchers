@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Rx';
 import { Title } from '@angular/platform-browser';
 import { StreamerDetailsService } from './services/streamer-details.service';
 
-import { routeFadeIn, routeSequenceAnim } from '../animations';
+import { routeFadeIn, routeSequenceAnim } from '../_animations';
 
 @Component({
     selector: 'tvrs-streamer-details',
@@ -25,9 +25,7 @@ export class StreamerDetailsComponent implements OnInit, OnDestroy {
         private streamerDetails: StreamerDetailsService,
         private titleService: Title
     ) { }
-    test() {
-        console.log('loaded')
-    }
+
     // Get streamers details and set page title
     getDetails(): void {
         this.streamerDetailsSub =
