@@ -25,7 +25,10 @@ export class StreamerDetailsComponent implements OnInit, OnDestroy {
         private streamerDetails: StreamerDetailsService,
         private titleService: Title
     ) { }
-
+    // Body overflow hidden to avoid multiple scrollbars
+    setOverflow(): void {
+        document.getElementsByTagName('body')[0].style['overflow'] = 'hidden';
+    }
     // Get streamers details and set page title
     getDetails(): void {
         this.streamerDetailsSub =
@@ -37,7 +40,7 @@ export class StreamerDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.getDetails();
-        document.getElementsByTagName('body')[0].style['overflow'] = 'hidden';
+        this.setOverflow();
     }
     ngOnDestroy(): void {
         this.streamerDetailsSub.unsubscribe();
