@@ -1,5 +1,5 @@
 <tvrs-spinner *ngIf="showSpinner"></tvrs-spinner>
-<tvrs-navbar *ngIf="!isHome" [@slideUpDown]></tvrs-navbar>
-<main [@routeAnim]="isHome">
-    <router-outlet></router-outlet>
+<tvrs-navbar *ngIf="getAnimation(route) && getAnimation(route) !== 'home'" [@slideUpDown]></tvrs-navbar>
+<main [@routeAnim]="getAnimation(route)">
+    <router-outlet #route="outlet"></router-outlet>
 </main>

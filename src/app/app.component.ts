@@ -15,31 +15,25 @@ import { routeAnim, slideUpDown } from './animations';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  private isHome = true;
   private showSpinner: Boolean;
-
   private spinnerSub: Subscription;
-  private routerSub: Subscription;
 
   constructor(
     private router: Router,
     private spinnerService: SpinnerService
   ) { }
+
+  // Listen to outlet changes (filtered to NavigationEnd) and return the current state param
+  getAnimation(outlet) {
+    return outlet.activatedRouteData.state;
+  }
   ngOnInit() {
-    // Listen to route changes (filtered to NavigationEnd) and set isHome accordingly
-    this.routerSub =
-      this.router.events
-        .filter(e => e instanceof NavigationEnd)
-        .subscribe((e) => {
-          this.isHome = this.router.isActive('', true) ? true : false;
-        });
     // Spinner shows on any http request
     this.spinnerSub = this.spinnerService.spinner.subscribe((val: Boolean) => {
       this.showSpinner = val;
     });
   }
   ngOnDestroy() {
-    this.routerSub.unsubscribe();
     this.spinnerSub.unsubscribe();
   }
 }

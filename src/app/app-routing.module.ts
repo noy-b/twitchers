@@ -10,11 +10,17 @@ import { StreamersResolver } from './streamers/services/streamers-resolver.servi
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    data: {
+      state: 'home'
+    }
   },
   {
     path: 'streamers/:streamersStatus',
     component: StreamersComponent,
+    data: {
+      state: 'streamers'
+    },
     resolve: {
       streamers: StreamersResolver
     },
