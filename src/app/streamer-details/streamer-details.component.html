@@ -1,4 +1,4 @@
-<div *ngIf="streamerInfos as streamer" class="streamer-details">
+<div [@routeSequenceAnim] *ngIf="streamerInfos as streamer" class="streamer-details">
     <div class="streamer-header" [style.background-image]="'url(' + streamer.profile_banner + ')'" 
     [ngStyle]="streamer.has_banner ? '' : {'background-repeat': 'repeat-x', 'background-size': 'auto', 'background-position': 'top' }">
         <div class="streamer-logo" [style.background-image]="'url(' + streamer.logo + ')'"></div>
@@ -9,8 +9,5 @@
     </div>
     <div class="streamer-body">
         <iframe *ngIf="streamer.player_url" class="streamer-player" [src]="streamer.player_url | safe" allowfullscreen="true"></iframe>
-    </div>
-    <div class="streamer-footer">
-
     </div>
 </div>

@@ -1,18 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { Title } from '@angular/platform-browser';
 import { StreamerDetailsService } from './services/streamer-details.service';
 
-import { } from '../animations';
+import { routeFadeIn, routeSequenceAnim } from '../animations';
 
 @Component({
     selector: 'tvrs-streamer-details',
     templateUrl: './streamer-details.component.html',
-    styleUrls: ['./streamer-details.component.css']
+    styleUrls: ['./streamer-details.component.css'],
+    animations: [ routeFadeIn, routeSequenceAnim ]
 })
 export class StreamerDetailsComponent implements OnInit, OnDestroy {
+    @HostBinding('@routeFadeIn')
+
     private streamerDetailsSub: Subscription;
     private streamerInfos;
     private streamerName = this.activeRoute.snapshot.params['streamersName'];
@@ -22,7 +25,9 @@ export class StreamerDetailsComponent implements OnInit, OnDestroy {
         private streamerDetails: StreamerDetailsService,
         private titleService: Title
     ) { }
-
+    test() {
+        console.log('loaded')
+    }
     // Get streamers details and set page title
     getDetails(): void {
         this.streamerDetailsSub =
