@@ -6,8 +6,7 @@ export class StreamerDetails {
     status: String;
     views: Number;
     logo: String;
-    profile_banner: String;
-    has_banner: Boolean;
+    images: Images;
     player_url: String;
     url: String;
     online: Online|Boolean;
@@ -18,12 +17,21 @@ export class StreamerDetails {
         this.bio = channel.description || `No biography found for ${this.username}! :(`;
         this.status = channel.status  || false;
         this.views = channel.views;
-        this.logo = channel.logo || 'https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png';
-        this.profile_banner = channel.profile_banner || 'https://web-cdn.ttvnw.net/images/xarth/bg_glitch_pattern.png';
-        this.has_banner = channel.profile_banner || false;
+        this.images = new Images(channel.logo, channel.profile_banner);
         this.player_url = `http://player.twitch.tv/?channel=${this.name}`;
         this.url = `https://go.twitch.tv/${this.name}`;
         this.online = live.stream ? new Online(live.stream) : false;
+    }
+}
+export class Images {
+    logo: String;
+    profile: String|Boolean;
+
+    constructor(profileLogo, profileBanner) {
+        this.logo = profileLogo || 'https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png';
+        this.profile = profileBanner ?
+            `url(${profileBanner}) center / cover no-repeat` :
+            `url(https://web-cdn.ttvnw.net/images/xarth/bg_glitch_pattern.png) top / auto repeat-x`;
     }
 }
 // Online class
