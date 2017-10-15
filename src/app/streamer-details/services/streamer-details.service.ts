@@ -19,6 +19,8 @@ export class StreamerDetailsService {
                             .set('Client-ID', `${this.apiKey}`)
                             .set('Accept', 'application/vnd.twitchtv.v5+json');
 
+    public streamerDetails = <BehaviorSubject<StreamerDetails>> new BehaviorSubject(null);
+
     constructor(
         private http: HttpClient
     ) { }
@@ -43,6 +45,10 @@ export class StreamerDetailsService {
             const channel = this.http.get(this.urlChannel + data.users[0]._id, { headers: this.httpHeaders });
 
             return Observable.forkJoin([ stream, channel ]);
-        }).map(data => new StreamerDetails(data[0], data[1]));
+        }).map((data: any[]) => {
+            const newData = new StreamerDetails(data[0], data[1]);
+            this.streamerDetails.next(newData);
+            return newData;
+        });
     }
 }
