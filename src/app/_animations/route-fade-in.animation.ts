@@ -40,7 +40,7 @@ trigger('routeSequenceAnim', [
     sequence([
       query('.streamer-body', [
         style({ transform: 'translateY(100%)' }),
-        animate('.5s .5s ease-in', style({ transform: 'translateY(0%)' }))
+        animate('.5s ease-in', style({ transform: 'translateY(0%)' }))
       ]),
       query('.streamer-header', [
         style({ transform: 'translateY(-100%)' }),
