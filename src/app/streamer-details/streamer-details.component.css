@@ -18,9 +18,6 @@
     position:relative;
     display:flex;
     min-height:250px;
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-position: center;
     align-items:center;
     justify-content:start;
 } .streamer-details > .streamer-header:before {
@@ -56,10 +53,7 @@
     padding: 0 0 0 5px;
 }
 .streamer-details > .streamer-body {
-    display:flex;
-    flex: 1;
-} .streamer-details > .streamer-body > .streamer-player {
-    border:0;
+    display: flex;
     width:100%;
     height:100vh; /*  Otherwise IE is unhappy */
 }
@@ -71,7 +65,7 @@
     }
     .streamer-details {
         min-height: calc(100vh + 250px - 59px);
-    } .streamer-details > .streamer-body > .streamer-player {
+    } .streamer-details > .streamer-body {
         height:calc(100vh - 59px); /*  Otherwise IE is unhappy */
     }    
 }

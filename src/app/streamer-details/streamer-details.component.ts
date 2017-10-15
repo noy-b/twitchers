@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import { StreamerPlayerService } from './services/streamer-player.service';
+import { Component, OnInit, HostBinding, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
@@ -13,36 +14,37 @@ import { routeFadeIn, routeSequenceAnim } from '../_animations';
     styleUrls: ['./streamer-details.component.css'],
     animations: [ routeFadeIn, routeSequenceAnim ]
 })
-export class StreamerDetailsComponent implements OnInit, OnDestroy {
+export class StreamerDetailsComponent implements OnInit, AfterViewInit {
     @HostBinding('@routeFadeIn')
 
     private streamerDetailsSub: Subscription;
     private streamerInfos;
     private streamerName = this.activeRoute.snapshot.params['streamersName'];
+    private streamerPlayerReady = this.streamerPlayer.twitchPlayerReady;
 
     constructor(
         private activeRoute: ActivatedRoute,
         private streamerDetails: StreamerDetailsService,
+        private streamerPlayer: StreamerPlayerService,
         private titleService: Title
-    ) { }
+    ) {
+        this.streamerInfos = this.streamerDetails.streamerDetails;
+    }
     // Body overflow hidden to avoid multiple scrollbars
     setOverflow(): void {
         document.getElementsByTagName('body')[0].style['overflow'] = 'hidden';
     }
-    // Get streamers details and set page title
-    getDetails(): void {
-        this.streamerDetailsSub =
-        this.streamerDetails.getStreamerDetails(this.streamerName).subscribe((streamer) => {
-           this.streamerInfos = streamer;
-           this.titleService.setTitle(`Twitch/ers - ${ this.streamerInfos.username }`);
-          });
+    getPlayer(): void {
+        this.streamerPlayer.createTwitchPlayer(this.streamerName.toLowerCase().replace(/ /g, ''));
     }
-
+    setPageTitle(): void {
+        this.titleService.setTitle(`Twitch/ers - ${ this.streamerName }`);
+    }
     ngOnInit(): void {
-        this.getDetails();
+        this.setPageTitle();
         this.setOverflow();
     }
-    ngOnDestroy(): void {
-        this.streamerDetailsSub.unsubscribe();
+    ngAfterViewInit(): void {
+        this.getPlayer();
     }
 }
