@@ -11,7 +11,7 @@
                     <span class="stream-uptime">{{ streamer.uptime }}</span>
                </div>
                <div class="stream-overlay">
-                    <a title="More about {{ streamer.username }}" [routerLink]="[ { outlets: { details: [ streamer.name ] } } ]" class="stream-more" (focus)="stream.focus = true; streamParent.focus = true" (blur)="stream.focus = false; streamParent.focus = false"></a>
+                    <a title="More about {{ streamer.username }}" [routerLink]="[ { outlets: { details: [ streamer.username ] } } ]" class="stream-more" (focus)="stream.focus = true; streamParent.focus = true" (blur)="stream.focus = false; streamParent.focus = false"></a>
                </div>
             </div>
             <div class="stream-footer">
