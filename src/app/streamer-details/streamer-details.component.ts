@@ -1,5 +1,4 @@
-import { StreamerPlayerService } from './services/streamer-player.service';
-import { Component, OnInit, HostBinding, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
@@ -14,37 +13,33 @@ import { routeFadeIn, routeSequenceAnim } from '../_animations';
     styleUrls: ['./streamer-details.component.css'],
     animations: [ routeFadeIn, routeSequenceAnim ]
 })
-export class StreamerDetailsComponent implements OnInit, AfterViewInit {
+export class StreamerDetailsComponent implements OnInit, OnDestroy {
     @HostBinding('@routeFadeIn')
 
     private streamerDetailsSub: Subscription;
-    private streamerInfos;
+    private streamerInfos = this.streamerDetails.streamerDetails;
     private streamerName = this.activeRoute.snapshot.params['streamersName'];
-    private streamerPlayerReady = this.streamerPlayer.twitchPlayerReady;
 
     constructor(
         private activeRoute: ActivatedRoute,
         private streamerDetails: StreamerDetailsService,
-        private streamerPlayer: StreamerPlayerService,
         private titleService: Title
-    ) {
-        this.streamerInfos = this.streamerDetails.streamerDetails;
-    }
+    ) { }
     // Body overflow hidden to avoid multiple scrollbars
-    setOverflow(): void {
-        document.getElementsByTagName('body')[0].style['overflow'] = 'hidden';
+    setOverflow(type: string): void {
+        document.getElementsByTagName('body')[0].style['overflow'] = type;
     }
-    getPlayer(): void {
-        this.streamerPlayer.createTwitchPlayer(this.streamerName.toLowerCase().replace(/ /g, ''));
-    }
+    // Set the page title
     setPageTitle(): void {
-        this.titleService.setTitle(`Twitch/ers - ${ this.streamerName }`);
+        this.titleService.setTitle(`Twitch/ers - ${this.streamerName}`);
     }
+
+    // Hooks Life Cycle
     ngOnInit(): void {
         this.setPageTitle();
-        this.setOverflow();
+        this.setOverflow('hidden');
     }
-    ngAfterViewInit(): void {
-        this.getPlayer();
+    ngOnDestroy(): void {
+        this.setOverflow('');
     }
 }

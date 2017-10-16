@@ -18,7 +18,6 @@ import { StreamersService } from './streamers/services/streamers.service';
 import { StreamersResolver } from './streamers/services/streamers-resolver.service';
 import { StreamerDetailsService } from './streamer-details/services/streamer-details.service';
 import { StreamerDetailsResolver } from './streamer-details/services/streamer-details-resolver.service';
-import { StreamerPlayerService } from './streamer-details/services/streamer-player.service';
 // Pipes
 import { SafePipe } from './_pipes/safe.pipe';
 
@@ -43,8 +42,7 @@ import { SafePipe } from './_pipes/safe.pipe';
     StreamersService,
     StreamersResolver,
     StreamerDetailsService,
-    StreamerDetailsResolver,
-    StreamerPlayerService,
+    StreamerDetailsResolver
   ],
   bootstrap: [
     AppComponent
