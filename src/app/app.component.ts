@@ -27,6 +27,8 @@ export class AppComponent implements OnInit, OnDestroy {
   getAnimation(outlet) {
     return outlet.activatedRouteData.state;
   }
+
+  // Hooks Life Cycle
   ngOnInit() {
     // Spinner shows on any http request
     this.spinnerSub = this.spinnerService.spinner.subscribe((val: Boolean) => {

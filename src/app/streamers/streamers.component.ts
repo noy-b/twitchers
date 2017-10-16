@@ -41,6 +41,7 @@ export class StreamersComponent implements OnInit, OnDestroy {
     this.filter = this.activeRoute.paramMap
       .map(params => params.get('streamersStatus'));
   }
+
   // Hooks Life Cycle
   ngOnInit(): void {
     this.titleService.setTitle(`Twitch/ers - Hub`);
