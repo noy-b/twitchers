@@ -8,8 +8,11 @@ export class SafePipe implements PipeTransform {
         private sanitizer: DomSanitizer
     ) {}
 
-    transform(url) {
-        return this.sanitizer.bypassSecurityTrustStyle(url);
+    transform(url, type: String) {
+        if (type === 'url') {
+            return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+        } else {
+            return this.sanitizer.bypassSecurityTrustStyle(url);
+        }
     }
-
 }
