@@ -17,7 +17,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'streamers/:streamersStatus',
+    path: ':streamersStatus',
     component: StreamersComponent,
     data: {
       state: 'streamers'
