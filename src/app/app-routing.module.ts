@@ -6,7 +6,6 @@ import { HomeComponent } from './home/home.component';
 import { StreamersComponent } from './streamers/streamers.component';
 import { StreamersResolver } from './streamers/services/streamers-resolver.service';
 import { StreamerDetailsComponent } from './streamer-details/streamer-details.component';
-import { StreamerDetailsResolver } from './streamer-details/services/streamer-details-resolver.service';
 
 
 const routes: Routes = [
@@ -28,11 +27,8 @@ const routes: Routes = [
     },
     children: [
       {
-        path: ':streamersName',
+        path: ':streamerName',
         component: StreamerDetailsComponent,
-        resolve: {
-          streamers: StreamerDetailsResolver
-        },
         outlet: 'details'
       }
     ],

@@ -17,7 +17,6 @@ import { SpinnerService } from './spinner/services/spinner.service';
 import { StreamersService } from './streamers/services/streamers.service';
 import { StreamersResolver } from './streamers/services/streamers-resolver.service';
 import { StreamerDetailsService } from './streamer-details/services/streamer-details.service';
-import { StreamerDetailsResolver } from './streamer-details/services/streamer-details-resolver.service';
 // Pipes
 import { SafePipe } from './_pipes/safe.pipe';
 
@@ -41,8 +40,7 @@ import { SafePipe } from './_pipes/safe.pipe';
     SpinnerService,
     StreamersService,
     StreamersResolver,
-    StreamerDetailsService,
-    StreamerDetailsResolver
+    StreamerDetailsService
   ],
   bootstrap: [
     AppComponent
