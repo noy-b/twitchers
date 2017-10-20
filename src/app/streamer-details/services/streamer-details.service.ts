@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable, BehaviorSubject, Subject, Subscription } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 import { StreamerDetails } from '../models/streamer-details';
 import { SpinnerService } from '../../spinner/services/spinner.service';
@@ -19,10 +19,9 @@ export class StreamerDetailsService {
                             .set('Client-ID', `${this.apiKey}`)
                             .set('Accept', 'application/vnd.twitchtv.v5+json');
 
-    public streamerDetails = <BehaviorSubject<StreamerDetails>> new BehaviorSubject(null);
-
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private spinnerService: SpinnerService
     ) { }
     // Gets info about one streamer
     // 1. The first request is used to transform the username in ID
@@ -30,8 +29,10 @@ export class StreamerDetailsService {
     // 3. The stream request will also get the box-art for the game if it's online
     // 4. The results are cast in the StreamerDetails class
     public getStreamerDetails(streamer: String): Observable<any> {
-        return this.http.get(this.urlUser + streamer, { headers: this.httpHeaders })
+        return this.http.get(this.urlUser + streamer.toLowerCase().replace(/ /g, ''), { headers: this.httpHeaders })
         .switchMap((data: any) => {
+            // Show loading spinner
+            this.spinnerService.isLoading(true);
             const stream  = this.http.get(this.urlStream + data.users[0]._id, { headers: this.httpHeaders })
                             .switchMap((live: any) => {
                                 if (live.stream) {
@@ -47,7 +48,8 @@ export class StreamerDetailsService {
             return Observable.forkJoin([ stream, channel ]);
         }).map((data: any[]) => {
             const newData = new StreamerDetails(data[0], data[1]);
-            this.streamerDetails.next(newData);
+            // Hide loading spinner
+            this.spinnerService.isLoading(false);
             return newData;
         });
     }

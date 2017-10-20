@@ -1,12 +1,19 @@
-<div [@routeSequenceAnim] *ngIf="streamerInfos | async as streamer" class="streamer-details">
+<div #parentDiv [@routeSequenceAnim] *ngIf="streamerInfos | async as streamer" class="streamer-details">
     <div class="streamer-header" [style.background]="streamer.images.profile | safe:'style'">
         <div class="streamer-logo" [style.background-image]="'url(' + streamer.images.logo + ')'"></div>
         <div class="streamer-infos">
-            <h1 class="streamer-title">{{ streamer.username }}</h1>
+            <h1 class="streamer-title"><a target="_blank" title="Go to {{ streamer.username }} channel" href="{{ streamer.url }}">{{ streamer.username }}</a></h1>
+            <span class="streamer-created" title="{{ streamer.username }} channel creation">{{ streamer.creation.value }} </span>
+            <span class="streamer-views" title="Total {{ streamer.username }} views">{{ streamer.views.value }}</span>
             <p class="streamer-bio">{{ streamer.bio }}</p>
         </div>
     </div>
-    <div class="streamer-body">
-        <iframe class="streamer-player" [src]="streamer.player_url | safe:'url'" allowfullscreen="true"></iframe>
+    <div *ngIf="watchIt" class="streamer-body">
+        <div class="streamer-chat">
+            <iframe [src]="streamer.chat_url | safe:'url'" allowfullscreen="true" scrolling="no"></iframe>
+        </div>
+        <div class="streamer-player">
+           <iframe [src]="streamer.player_url | safe:'url'" allowfullscreen="true" scrolling="no"></iframe>
+        </div>
     </div>
 </div>
