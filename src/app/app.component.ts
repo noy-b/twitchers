@@ -6,12 +6,12 @@ import 'rxjs/add/operator/filter';
 
 import { SpinnerService } from './spinner/services/spinner.service';
 
-import { routeAnim, slideUpDown } from './_animations';
+import { routeAnim } from './_animations';
 
 @Component({
   selector: 'tvrs-root',
   templateUrl: './app.component.html',
-  animations: [routeAnim, slideUpDown]
+  animations: [ routeAnim ]
 })
 export class AppComponent implements OnInit, OnDestroy {
 
