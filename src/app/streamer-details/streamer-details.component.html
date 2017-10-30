@@ -1,19 +1,25 @@
-<div #parentDiv [@routeSequenceAnim] *ngIf="streamerInfos | async as streamer" class="streamer-details">
-    <div class="streamer-header" [style.background]="streamer.images.profile | safe:'style'">
-        <div class="streamer-logo" [style.background-image]="'url(' + streamer.images.logo + ')'"></div>
-        <div class="streamer-infos">
-            <h1 class="streamer-title"><a target="_blank" title="Go to {{ streamer.username }} channel" href="{{ streamer.url }}">{{ streamer.username }}</a></h1>
-            <span class="streamer-created" title="{{ streamer.username }} channel creation">{{ streamer.creation.value }} </span>
-            <span class="streamer-views" title="Total {{ streamer.username }} views">{{ streamer.views.value }}</span>
-            <p class="streamer-bio">{{ streamer.bio }}</p>
+<div #parentDiv class="streamer-details-container" [@detailsChildrenAnim] *ngIf="streamerInfos | async as streamer">
+    <div class="streamer-details" [style.background]="streamer.images.profile | safe:'style'">
+        <div class="streamer-stuff">
+            <div class="streamer-logo" [style.background-image]="'url(' + streamer.images.logo + ')'"></div>
+            <div class="streamer-infos">
+                <h1 class="streamer-title"><a target="_blank" title="Go to {{ streamer.username }} channel" href="{{ streamer.url }}">{{ streamer.username }}</a></h1>
+                <span class="streamer-numbers streamer-created icon creation" title="{{ streamer.username }} channel creation">{{ streamer.creation.value }} </span>
+                <span class="streamer-numbers streamer-views icon views" title="Total {{ streamer.username }} views">{{ streamer.views.value }}</span>
+                <p class="streamer-bio">{{ streamer.bio }}</p>
+            </div>
         </div>
     </div>
-    <div *ngIf="watchIt" class="streamer-body">
-        <div class="streamer-chat">
-            <iframe [src]="streamer.chat_url | safe:'url'" allowfullscreen="true" scrolling="no"></iframe>
+    <div class="streamer-watch" *ngIf="streamer.online">
+        <div class="streamer-game-cover" [style.background-image]="'url(' + streamer.online.game.cover + ')'"></div>
+        <div class="streamer-game">
+            <h2 class="streamer-game-title">{{ streamer.online.game.name }}</h2>
+            <span class="streamer-game-numbers streamer-game-viewers icon viewers">{{ streamer.online.viewers }} </span>
+            <span class="streamer-game-numbers streamer-game-uptime icon uptime">{{ streamer.online.uptime }}</span>
+            <p class="streamer-game-status">{{ streamer.online.status }}</p> 
         </div>
-        <div class="streamer-player">
-           <iframe [src]="streamer.player_url | safe:'url'" allowfullscreen="true" scrolling="no"></iframe>
-        </div>
+    </div>
+    <div class="streamer-player" *ngIf="watchIt">
+       <iframe [src]="streamer.player_url | safe:'url'" allowfullscreen="true" scrolling="no"></iframe>
     </div>
 </div>

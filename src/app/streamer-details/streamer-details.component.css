@@ -10,19 +10,42 @@
     min-height:100vh;
     background-color:rgba(0, 0, 0, 0.5);
 }
+/* Text sizes */
+span {
+    font-size:.9em;
+}
+/* Icons */
+.icon:before {
+    font-size: 1.3em;
+    margin-right: 5px;
+    font-family: "Material Design Icons";
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;  
+} .icon.views:before {
+    content: "\F50D";
+} .icon.creation:before {
+    content: "\F0ED";
+} .icon.viewers:before {
+    content: "\F009";
+} .icon.uptime:before {
+    content: "\F51A";
+}
+
+.streamer-details-container {
+    display: flex;
+    flex: 1 1 100%;
+    flex-flow: column;
+    align-self:flex-start;
+}
 .streamer-details {
-    flex: 1;
-    align-self: flex-end;
-} .streamer-details > .streamer-header {
     position:relative;
     display:flex;
-    flex-flow:column;
-    align-items:center;
-    justify-content:center;
-    min-height:50vh;
+    width: 100%;
+    align-self: flex-start;
     box-shadow: 8px 0 10px 5px rgba(0, 0, 0, 0.5);
-    padding: 2em;
-} .streamer-details > .streamer-header:before {
+} .streamer-details:before {
     position:absolute;
     top: 0; /*  Otherwise IE is unhappy */
     left:0;
@@ -30,9 +53,16 @@
     width:100%;
     height:100%;
     background-color:rgba(0, 0, 0, 0.9);
-} .streamer-details > .streamer-header > * {
-    z-index:1002;
-} .streamer-details > .streamer-header > .streamer-logo {
+    z-index:0;
+} .streamer-details > .streamer-stuff {
+    display:flex;
+    flex: 1 1 auto;
+    align-items:center;
+    text-align:left;
+} .streamer-details > .streamer-stuff {
+    position:relative;
+    z-index:2;
+} .streamer-details > .streamer-stuff > .streamer-logo {
     width:250px;
     height:250px;
     flex: 0 0 250px;
@@ -40,95 +70,71 @@
     background-repeat:no-repeat;
     background-size:cover;
     background-position:top;
-} .streamer-details > .streamer-header > .streamer-infos {
-    text-align:center;
-} .streamer-details > .streamer-header > .streamer-infos > .streamer-title {
-    font-size:5em;
+} .streamer-details > .streamer-stuff > .streamer-infos > .streamer-title,
+  .streamer-details > .streamer-stuff > .streamer-infos > .streamer-numbers,
+  .streamer-details > .streamer-stuff > .streamer-infos > .streamer-bio {
     margin:0 0 0 10px;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-} .streamer-details > .streamer-header > .streamer-infos > .streamer-title > a {
+} .streamer-details > .streamer-stuff > .streamer-infos > .streamer-title > a {
     color:#fff;
-} .streamer-details > .streamer-header > .streamer-infos > .streamer-title > a:hover {
+} .streamer-details > .streamer-stuff > .streamer-infos > .streamer-title > a:hover {
     color:gainsboro;
-} .streamer-details > .streamer-header > .streamer-infos > span {
+} .streamer-details > .streamer-stuff > .streamer-infos > .streamer-numbers {
     display:inline-flex;
     align-items:center;
     color: #fff;
-    font-weight:100;
-    font-size:1.2em;
-    padding:0 1em 1em 1em;
-} .streamer-details > .streamer-header > .streamer-infos > span:before {
-    margin-right:5px;
-    font-family: "Material Design Icons";
-    font-size: 1.2em;
-    text-rendering: auto;
-    line-height: inherit;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;     
-} .streamer-details > .streamer-header > .streamer-infos > .streamer-views:before {
-    content: "\F50D";
-} .streamer-details > .streamer-header > .streamer-infos > .streamer-created:before {
-    content: "\F0ED"
-} .streamer-details > .streamer-header > .streamer-infos > .streamer-bio {
+    padding: .4em 1em .4em 0;
+} .streamer-details > .streamer-stuff > .streamer-infos > .streamer-bio {
     color:#ccc;
-    font-size:1.5em;
-    font-weight:100;
-    margin:0 0 0 10px;
-    padding: 0 0 0 5px;
 }
-.streamer-details > .streamer-body {
-    display: flex;
-    width:100%;
-    height:100vh; /*  Otherwise IE is unhappy */
-} .streamer-details > .streamer-body > .streamer-chat {
-    display: flex;
-    flex:1 0 300px;
-} .streamer-details > .streamer-body > .streamer-player {
+.streamer-watch {
+    position:relative;
+    z-index:-1;
+    display:flex;
+    align-items:center;
+    text-align:left;
+    background-color:rgba(0, 0, 0, 0.8);
+} .streamer-watch > .streamer-game-cover {
+    width:70px;
+    height:100px;
+    flex: 0 0 70px;
+    background-color:#fff;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:top;
+} .streamer-watch > .streamer-game > .streamer-game-status,
+  .streamer-watch > .streamer-game > .streamer-game-title,
+  .streamer-watch > .streamer-game > .streamer-game-numbers {
+    margin:0 0 0 10px;
+} .streamer-watch > .streamer-game > .streamer-game-numbers {
+    display:inline-flex;
+    align-items:center;
+    color: #fff;
+    padding: .4em 1em .4em 0;
+} .streamer-watch > .streamer-game > .streamer-game-title {
+    color: #fff;
+} .streamer-watch > .streamer-game > .streamer-game-status {
+    color: #ccc;
+    padding-left:2px;
+}
+
+
+.streamer-details > .streamer-watch > .streamer-player {
     display: flex;
     flex:1 1 100%;
-} .streamer-details > .streamer-body > .streamer-chat > iframe,
-  .streamer-details > .streamer-body > .streamer-player > iframe {
+} .streamer-details > .streamer-watch > .streamer-player > iframe {
     width:100%;
     height:100%;
     border:0;
 }
 
-
 @media screen and (max-width: 992px) {
     :host {
         margin-left:0px;
     } 
-    .streamer-details {
-        margin-bottom:59px;
-    }    
 }
 @media screen and (max-width:768px) {
-    .streamer-details > .streamer-header > .streamer-logo {
-        width:200px;
-        height:200px;
-        flex: 0 0 200px;
-    } .streamer-details > .streamer-header > .streamer-infos > .streamer-title {
-        font-size:3.5em;
-    } .streamer-details > .streamer-header > .streamer-infos > span {
-        font-size:1em;
-    } .streamer-details > .streamer-header > .streamer-infos > .streamer-bio {
-        font-size:1.2em;
-    }
+
 }
 @media screen and (max-width:576px) {
-    .streamer-details > .streamer-header {
-        padding: .5em;
-    } .streamer-details > .streamer-header > .streamer-logo {
-        width:150px;
-        height:150px;
-        flex: 0 0 150px;
-    } .streamer-details > .streamer-header > .streamer-infos > .streamer-title {
-        word-break: break-all;
-        font-size:2.5em;
-    } .streamer-details > .streamer-header > .streamer-infos > span {
-        font-size:.9em;
-    } .streamer-details > .streamer-header > .streamer-infos > .streamer-bio {
-        font-size:1.1em;
-    }
+
 }

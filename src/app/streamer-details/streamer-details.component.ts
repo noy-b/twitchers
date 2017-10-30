@@ -5,17 +5,17 @@ import { Subscription } from 'rxjs/Rx';
 import { Title } from '@angular/platform-browser';
 import { StreamerDetailsService } from './services/streamer-details.service';
 
-import { routeFadeIn, routeSequenceAnim } from '../_animations';
+import { detailsParentAnim, detailsChildrenAnim } from '../_animations';
 
 @Component({
     selector: 'tvrs-streamer-details',
     templateUrl: './streamer-details.component.html',
     styleUrls: ['./streamer-details.component.css'],
-    animations: [routeFadeIn, routeSequenceAnim]
+    animations: [detailsParentAnim, detailsChildrenAnim]
 })
 export class StreamerDetailsComponent implements OnInit, OnDestroy {
     // Route animation
-    @HostBinding('@routeFadeIn')
+    @HostBinding('@detailsParentAnim')
 
     private streamerDetailsSub: Subscription;
     private streamerInfos;
