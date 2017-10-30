@@ -4,7 +4,6 @@ export class StreamerDetails {
     username: String;
     bio: String;
     creation: Creation;
-    status: String;
     views: Views;
     logo: String;
     images: Images;
@@ -18,15 +17,15 @@ export class StreamerDetails {
         this.username = channel.display_name;
         this.bio = channel.description || `No biography found for ${this.username}! :(`;
         this.creation = new Creation(channel.created_at);
-        this.status = channel.status  || false;
         this.views = new Views(channel.views);
         this.images = new Images(channel.logo, channel.profile_banner);
         this.player_url = `https://player.twitch.tv/?channel=${this.name}&autoplay=false`;
         this.chat_url = `https://www.twitch.tv/${this.name}/chat`;
         this.url = `https://go.twitch.tv/${this.name}`;
-        this.online = live.stream ? new Online(live.stream) : false;
+        this.online = live.stream ? new Online(live.stream, channel.status) : false;
     }
 }
+// Creation class
 export class Creation {
     value: String;
 
@@ -34,6 +33,7 @@ export class Creation {
         this.value = new Date(date).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
     }
 }
+// Views class
 export class Views {
     value: String;
 
@@ -41,6 +41,7 @@ export class Views {
         this.value = views.toLocaleString('en-US');
     }
 }
+// Images class
 export class Images {
     logo: String;
     profile: String|Boolean;
@@ -55,12 +56,14 @@ export class Images {
 // Online class
 export class Online {
     game: Game;
+    status: String;
     viewers: Number;
     uptime: String;
 
-    constructor(live) {
+    constructor(live, status) {
         this.game = new Game(live.game, live.game_box);
-        this.viewers = live.viewers;
+        this.status = status  || '';
+        this.viewers = live.viewers.toLocaleString('en-US');
         this.uptime = this.getUptime(new Date(), new Date(live.created_at));
     }
     private getUptime(now, then): String {
