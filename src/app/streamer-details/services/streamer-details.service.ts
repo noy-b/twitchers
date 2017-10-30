@@ -29,16 +29,18 @@ export class StreamerDetailsService {
     // 3. The stream request will also get the box-art for the game if it's online
     // 4. The results are cast in the StreamerDetails class
     public getStreamerDetails(streamer: String): Observable<any> {
-        return this.http.get(this.urlUser + streamer.toLowerCase().replace(/ /g, ''), { headers: this.httpHeaders })
+        const formattedStremer = streamer.toLowerCase().replace(/ /g, '');
+        return this.http.get(this.urlUser + formattedStremer, { headers: this.httpHeaders })
         .switchMap((data: any) => {
             // Show loading spinner
             this.spinnerService.isLoading(true);
             const stream  = this.http.get(this.urlStream + data.users[0]._id, { headers: this.httpHeaders })
                             .switchMap((live: any) => {
                                 if (live.stream) {
-                                    return this.http.get(this.urlCover + live.stream.game, { headers: this.httpHeaders })
+                                    const encodedGame = encodeURIComponent(live.stream.game);
+                                    return this.http.get(this.urlCover + encodedGame, { headers: this.httpHeaders })
                                     .map((cover: any) => {
-                                        live.stream.game_box = cover.games[0].box.medium;
+                                        live.stream.game_box = cover.games[0].box.large;
                                         return live;
                                     });
                                 } else { return Observable.of(live); }
@@ -46,7 +48,9 @@ export class StreamerDetailsService {
             const channel = this.http.get(this.urlChannel + data.users[0]._id, { headers: this.httpHeaders });
 
             return Observable.forkJoin([ stream, channel ]);
-        }).map((data: any[]) => {
+        }).retryWhen(errors => errors.delay(5000).take(10))
+        .map((data: any[]) => {
+            // Cast results to StreamerDetails class
             const newData = new StreamerDetails(data[0], data[1]);
             // Hide loading spinner
             this.spinnerService.isLoading(false);
