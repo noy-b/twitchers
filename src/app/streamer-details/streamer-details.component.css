@@ -44,7 +44,7 @@ span {
     display:flex;
     width: 100%;
     align-self: flex-start;
-    box-shadow: 8px 0 10px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 8px 0 5px 5px rgba(0, 0, 0, 0.5);
 } .streamer-details:before {
     position:absolute;
     top: 0; /*  Otherwise IE is unhappy */
@@ -55,13 +55,12 @@ span {
     background-color:rgba(0, 0, 0, 0.9);
     z-index:0;
 } .streamer-details > .streamer-stuff {
+    position:relative;
+    z-index:2;
     display:flex;
     flex: 1 1 auto;
     align-items:center;
     text-align:left;
-} .streamer-details > .streamer-stuff {
-    position:relative;
-    z-index:2;
 } .streamer-details > .streamer-stuff > .streamer-logo {
     width:250px;
     height:250px;
@@ -77,11 +76,11 @@ span {
 } .streamer-details > .streamer-stuff > .streamer-infos > .streamer-title > a {
     color:#fff;
 } .streamer-details > .streamer-stuff > .streamer-infos > .streamer-title > a:hover {
-    color:gainsboro;
+    color:#ccc;
 } .streamer-details > .streamer-stuff > .streamer-infos > .streamer-numbers {
     display:inline-flex;
     align-items:center;
-    color: #fff;
+    color: #ccc;
     padding: .4em 1em .4em 0;
 } .streamer-details > .streamer-stuff > .streamer-infos > .streamer-bio {
     color:#ccc;
@@ -92,7 +91,21 @@ span {
     display:flex;
     align-items:center;
     text-align:left;
-    background-color:rgba(0, 0, 0, 0.8);
+    background: url(https://web-cdn.ttvnw.net/images/xarth/bg_glitch_pattern.png) center top / auto repeat;
+    box-shadow: 8px 0 10px 5px rgba(0, 0, 0, 0.5);
+} .streamer-watch:before {
+    position:absolute;
+    z-index:0;
+    top:0; /*  Otherwise IE is unhappy */
+    left:0;
+    content: " ";
+    width:100%;
+    height:100%;
+    background-color: rgba(18, 21, 43, .8);
+} .streamer-watch > .streamer-game-cover, 
+  .streamer-watch > .streamer-game {
+    position:relative;
+    z-index:2;
 } .streamer-watch > .streamer-game-cover {
     width:70px;
     height:100px;
@@ -105,16 +118,18 @@ span {
   .streamer-watch > .streamer-game > .streamer-game-title,
   .streamer-watch > .streamer-game > .streamer-game-numbers {
     margin:0 0 0 10px;
+} .streamer-watch > .streamer-game > .streamer-game-title {
+    color: #fff;
 } .streamer-watch > .streamer-game > .streamer-game-numbers {
     display:inline-flex;
     align-items:center;
-    color: #fff;
+    color: #ccc;
     padding: .4em 1em .4em 0;
-} .streamer-watch > .streamer-game > .streamer-game-title {
-    color: #fff;
+    font-size:.8em;
 } .streamer-watch > .streamer-game > .streamer-game-status {
     color: #ccc;
     padding-left:2px;
+    font-size:.9em;
 }
 
 

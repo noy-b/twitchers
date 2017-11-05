@@ -17,11 +17,12 @@ export class StreamerDetailsComponent implements OnInit, OnDestroy {
     // Route animation
     @HostBinding('@detailsParentAnim')
 
+    private interval = 60000; // Polling interval (1 minute)
     private streamerDetailsSub: Subscription;
     private streamerInfos;
     private streamerName = this.activeRoute.snapshot.params['streamerName'];
 
-    // Clicking outside of the streamer's details modal or pressing the ESC key will close it
+    // Clicking outside of the streamer's details component or pressing the ESC key will close it
     @ViewChild('parentDiv') parentDiv;
     @HostListener('document:click', ['$event'])
     clickOutside(e) {
@@ -52,17 +53,20 @@ export class StreamerDetailsComponent implements OnInit, OnDestroy {
         const url = this.router.url.replace(/ *\([^)]*\) */g, '').slice(0, -1);
         this.router.navigate([url, { outlets: { details: null } }]);
     }
-    // Get streamer details
-    getDetails(name: String) {
-        this.streamerInfos = this.streamerDetails.getStreamerDetails(name);
+    // Starts streamer's polling
+    pollStreamer(): void {
+        this.streamerDetails.streamerInfos.next(null);
+        this.streamerDetails.pollStreamer(this.interval, this.streamerName); // Kicks off the polling
+        this.streamerInfos = this.streamerDetails.streamerInfos;
     }
 
     // Hooks Life Cycle
     ngOnInit(): void {
+        this.pollStreamer();
         this.setPageTitle(`Twitch/ers - ${this.streamerName}`);
-        this.getDetails(this.streamerName);
     }
     ngOnDestroy(): void {
+        this.streamerDetails.timerSub.unsubscribe(); // Ends the polling
         this.setPageTitle(`Twitch/ers - Hub`);
     }
 }

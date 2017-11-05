@@ -13,7 +13,7 @@
     <div class="streamer-watch" *ngIf="streamer.online">
         <div class="streamer-game-cover" [style.background-image]="'url(' + streamer.online.game.cover + ')'"></div>
         <div class="streamer-game">
-            <h2 class="streamer-game-title">{{ streamer.online.game.name }}</h2>
+            <h3 class="streamer-game-title">{{ streamer.online.game.name }}</h3>
             <span class="streamer-game-numbers streamer-game-viewers icon viewers">{{ streamer.online.viewers }} </span>
             <span class="streamer-game-numbers streamer-game-uptime icon uptime">{{ streamer.online.uptime }}</span>
             <p class="streamer-game-status">{{ streamer.online.status }}</p> 

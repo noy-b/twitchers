@@ -29,9 +29,13 @@ trigger('detailsChildrenAnim', [
         animate('.2s ease-out', style({ transform: 'translateY(-100%)' })),
         style({ opacity: '0' })
       ]),
-      query('.streamer-stuff', [
+      query('.streamer-title, .streamer-numbers, .streamer-bio', [
+        style({ opacity: '1' }),
+        animate('.3s ease-in', style({ opacity: '0' }))
+      ]),
+      query('.streamer-logo', [
         style({ transform: 'translateX(0%)' }),
-        animate('.5s ease-out', style({ transform: 'translateX(-100%)' }))
+        animate('.3s ease-out', style({ transform: 'translateX(-100%)' }))
       ]),
       query('.streamer-details', [
         style({ transform: 'translateY(0%)' }),
@@ -40,20 +44,25 @@ trigger('detailsChildrenAnim', [
     ])
   ]),
   transition(':enter', [
-    query('.streamer-stuff', [ style({ transform: 'translateX(-100%)' }) ]),
+    query('.streamer-logo', [ style({ transform: 'translateX(-100%)' }) ]),
     query('.streamer-watch', [ style({ transform: 'translateY(-100%)', opacity: '0' }) ]),
+    query('.streamer-title, .streamer-numbers, .streamer-bio', [ style({ opacity: '0' }) ]),
     sequence([
       query('.streamer-details', [
         style({ transform: 'translateY(-100%)' }),
         animate('.3s ease-in-out', style({ transform: 'translateY(0%)' })),
       ]),
-      query('.streamer-stuff', [
+      query('.streamer-logo', [
         style({ transform: 'translateX(-100%)' }),
-        animate('.5s ease-in', style({ transform: 'translateX(0%)' }))
+        animate('.3s ease-in', style({ transform: 'translateX(0%)' }))
+      ]),
+      query('.streamer-title, .streamer-numbers, .streamer-bio', [
+        style({ opacity: '0' }),
+        animate('.3s ease-in', style({ opacity: '1' }))
       ]),
       query('.streamer-watch', [
         style({ transform: 'translateY(-100%)', opacity: '1' }),
-        animate('200ms 600ms ease-in', style({ transform: 'translateY(0%)' }))
+        animate('0.2s 0.3s ease-in', style({ transform: 'translateY(0%)' }))
       ])
     ])
   ])

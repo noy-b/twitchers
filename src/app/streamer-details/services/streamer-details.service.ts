@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs/Rx';
 
 import { StreamerDetails } from '../models/streamer-details';
 import { SpinnerService } from '../../spinner/services/spinner.service';
@@ -19,6 +19,9 @@ export class StreamerDetailsService {
                             .set('Client-ID', `${this.apiKey}`)
                             .set('Accept', 'application/vnd.twitchtv.v5+json');
 
+    public timerSub: Subscription;
+    public streamerInfos = <BehaviorSubject<StreamerDetails>> new BehaviorSubject(null);
+
     constructor(
         private http: HttpClient,
         private spinnerService: SpinnerService
@@ -29,8 +32,8 @@ export class StreamerDetailsService {
     // 3. The stream request will also get the box-art for the game if it's online
     // 4. The results are cast in the StreamerDetails class
     public getStreamerDetails(streamer: String): Observable<any> {
-        const formattedStremer = streamer.toLowerCase().replace(/ /g, '');
-        return this.http.get(this.urlUser + formattedStremer, { headers: this.httpHeaders })
+        const formattedStreamer = streamer.toLowerCase().replace(/ /g, '');
+        return this.http.get(this.urlUser + formattedStreamer, { headers: this.httpHeaders })
         .switchMap((data: any) => {
             // Show loading spinner
             this.spinnerService.isLoading(true);
@@ -48,13 +51,18 @@ export class StreamerDetailsService {
             const channel = this.http.get(this.urlChannel + data.users[0]._id, { headers: this.httpHeaders });
 
             return Observable.forkJoin([ stream, channel ]);
-        }).retryWhen(errors => errors.delay(5000).take(10))
-        .map((data: any[]) => {
+        }).map((data: any[]) => {
             // Cast results to StreamerDetails class
             const newData = new StreamerDetails(data[0], data[1]);
+            // Update Behaviour Subject's data
+            this.streamerInfos.next(newData);
             // Hide loading spinner
             this.spinnerService.isLoading(false);
             return newData;
-        });
+        }).retryWhen(errors => errors.delay(5000).take(10));
+    }
+    // Polling of streamer's infos
+    public pollStreamer(interval: number, name: string) {
+        this.timerSub = Observable.timer(0, interval).switchMap(() => this.getStreamerDetails(name)).subscribe();
     }
 }
