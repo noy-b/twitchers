@@ -29,12 +29,11 @@ export class StreamersComponent implements OnInit, OnDestroy {
     private activeRoute: ActivatedRoute,
     private streamersService: StreamersService,
     private titleService: Title
-  ) {
-    this.streamers = this.streamersService.streamersList;
-  }
+  ) { }
   // Starts streamers list polling
   pollStreamers(): void {
     this.streamersService.pollStreamers(this.interval); // Kicks off the polling
+    this.streamers = this.streamersService.streamersList;
   }
   // Filters channels based on URL param
   filterStreamers(): void {

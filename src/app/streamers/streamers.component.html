@@ -1,14 +1,14 @@
 <tvrs-navbar></tvrs-navbar>
 <div class="streams">
     <ng-container *ngFor="let streamer of streamers | async">
-        <div #streamParent [class.focus]="streamParent.focus === true" *ngIf="(filter | async) === 'all' || (filter | async) === streamer.status.text" 
-        [attr.data-id]="streamer.id" class="stream {{ streamer.name }} {{ streamer.status.text }}">
+        <div #streamParent [class.focus]="streamParent.focus === true" *ngIf="(filter | async) === 'all' || (filter | async) === streamer.status.text"
+        class="stream {{ streamer.name }} {{ streamer.status.text }}">
             <div #stream [class.focus]="stream.focus === true" class="stream-body" [style.background-image]="'url(' + streamer.logo + ')'">
                <div class="stream-current" [attr.data-tooltip]="streamer.game || null">
                  <span class="stream-game">{{ streamer.game || '' }}</span>
                </div>
                <div class="stream-infos" *ngIf="streamer.status.value">
-                    <span class="stream-viewers">{{ streamer.viewers.toLocaleString('en') }}</span>
+                    <span class="stream-viewers">{{ streamer.viewers }}</span>
                     <span class="stream-uptime">{{ streamer.uptime }}</span>
                </div>
                <div class="stream-overlay">

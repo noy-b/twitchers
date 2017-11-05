@@ -80,7 +80,7 @@ export class StreamersService {
         if (this.timerSub) {
             this.timerSub.unsubscribe();
         }
-        this.timerSub = Observable.timer(interval, 60000).switchMap(() => this.getStreamers()).subscribe();
+        this.timerSub = Observable.timer(interval, interval).switchMap(() => this.getStreamers()).subscribe();
     }
     // Errors Handling
     private handleError(error: any): Observable<any> {

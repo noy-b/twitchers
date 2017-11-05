@@ -1,6 +1,5 @@
 // Main streamer class
 export class Streamer {
-    id: Number;
     name: String;
     username: String;
     logo: String;
@@ -11,14 +10,13 @@ export class Streamer {
     uptime: String|Boolean;
 
     constructor(obj) {
-        this.id = Number(obj._id);
         this.name = obj.name;
         this.username = obj.display_name;
         this.logo = obj.logo || 'https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png';
         this.status = new Status(obj.online);
         this.game = obj.gamename || false;
         this.url = `https://go.twitch.tv/${obj.name}`;
-        this.viewers = obj.viewers || '0';
+        this.viewers = obj.viewers ? obj.viewers.toLocaleString('en') : '0';
         this.uptime = obj.uptime ? this.getUptime(new Date(), new Date(obj.uptime)) : false;
     }
 
