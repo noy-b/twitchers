@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/filter';
 
-import { SpinnerService } from './spinner/services/spinner.service';
+import { SpinnerService } from './_services/spinner.service';
 
 import { routeAnim } from './_animations';
 

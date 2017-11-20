@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 
 import { Title } from '@angular/platform-browser';
-import { StreamerDetailsService } from './services/streamer-details.service';
+import { StreamerDetailsService } from '../_services/streamer-details.service';
 
 import { detailsParentAnim, detailsChildrenAnim } from '../_animations';
 

@@ -3,8 +3,8 @@ import { Router, Resolve } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 
-import { Streamer } from '../models/streamers';
-import { StreamersService } from './streamers.service';
+import { Streamer } from '../_models/streamers';
+import { StreamersService } from '../_services/streamers.service';
 
 @Injectable()
 export class StreamersResolver implements Resolve<Streamer[]> {

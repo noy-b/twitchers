@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { StreamersComponent } from './streamers/streamers.component';
-import { StreamersResolver } from './streamers/services/streamers-resolver.service';
+import { StreamersResolver } from './_resolvers/streamers-resolver.service';
 import { StreamerDetailsComponent } from './streamer-details/streamer-details.component';
 
 

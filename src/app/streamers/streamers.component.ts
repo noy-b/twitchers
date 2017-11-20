@@ -4,8 +4,8 @@ import { Title } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs/Rx';
 
-import { Streamer } from './models/streamers';
-import { StreamersService } from './services/streamers.service';
+import { Streamer } from '../_models/streamers';
+import { StreamersService } from '../_services/streamers.service';
 
 import { staggerFade } from '../_animations';
 

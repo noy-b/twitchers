@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, BehaviorSubject, Subject, Subscription } from 'rxjs/Rx';
 
-import { Streamer } from '../models/streamers';
-import { SpinnerService } from '../../spinner/services/spinner.service';
+import { Streamer } from '../_models/streamers';
+import { SpinnerService } from '../_services/spinner.service';
 
 // Service to get all the streams and infos
 @Injectable()

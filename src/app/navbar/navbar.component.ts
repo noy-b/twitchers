@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { StreamersService } from '../streamers/services/streamers.service';
+import { StreamersService } from '../_services/streamers.service';
 
 @Component({
   selector: 'tvrs-navbar',

@@ -13,10 +13,11 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { StreamersComponent } from './streamers/streamers.component';
 import { StreamerDetailsComponent } from './streamer-details/streamer-details.component';
 // Services
-import { SpinnerService } from './spinner/services/spinner.service';
-import { StreamersService } from './streamers/services/streamers.service';
-import { StreamersResolver } from './streamers/services/streamers-resolver.service';
-import { StreamerDetailsService } from './streamer-details/services/streamer-details.service';
+import { SpinnerService } from './_services/spinner.service';
+import { SearchService } from './_services/search.service';
+import { StreamersService } from './_services/streamers.service';
+import { StreamerDetailsService } from './_services/streamer-details.service';
+import { StreamersResolver } from './_resolvers/streamers-resolver.service';
 // Pipes
 import { SafePipe } from './_pipes/safe.pipe';
 
@@ -38,6 +39,7 @@ import { SafePipe } from './_pipes/safe.pipe';
   ],
   providers: [
     SpinnerService,
+    SearchService,
     StreamersService,
     StreamersResolver,
     StreamerDetailsService
